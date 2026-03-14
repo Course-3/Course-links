@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ℂ𝕠𝕦𝕣𝕤𝕖 - روابط التواصل</title>
+    <link rel="icon" type="image/png" href="2e3c58b7-4974-4ce7-9efd-6eb0cd41b5a5.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text-color: white;
+            --sub-text: #aaa;
+            --border-color: #333;
+            --hover-bg: #252525;
+        }
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #1c1e21;
+            --sub-text: #606770;
+            --border-color: #ddd;
+            --hover-bg: #f5f6f7;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .fade-target {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .fade-out {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+        .top-toolbar {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .tool-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .tool-btn:hover { background: var(--hover-bg); }
+        .header-container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .top-badge {
+            background: var(--card-bg);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: inline-block;
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        .banner {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('a1deec63950ff509beb8c51c1e84f807.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid #ff000033;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--bg-color);
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #222;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-img img { width: 100%; height: 100%; object-fit: cover; }
+        .info { margin-top: 60px; margin-bottom: 30px; }
+        .info h1 { margin: 10px 0 5px; font-size: 28px; letter-spacing: 2px; }
+        .info p { color: var(--sub-text); margin: 5px 0; font-size: 14px; }
+        .links-section { width: 100%; max-width: 500px; }
+        .section-title {
+            font-size: 12px;
+            color: var(--sub-text);
+            margin: 20px 0 10px;
+            text-align: inherit;
+            padding: 0 10px;
+        }
+        .link-card {
+            background: var(--card-bg);
+            margin-bottom: 12px;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+        .link-card:hover {
+            border-color: #ff000066;
+            transform: translateY(-2px);
+            background: var(--hover-bg);
+        }
+        .link-info { display: flex; align-items: center; gap: 15px; }
+        .link-info i { font-size: 22px; width: 30px; text-align: center; }
+        .arrow { color: var(--sub-text); font-size: 14px; }
+        .fa-kick { color: #05ff05; }
+        .fa-youtube { color: #ff0000; }
+        .fa-tiktok { color: #ffffff; }
+        [data-theme="light"] .fa-tiktok { color: #000; }
+        .fa-discord { color: #5865f2; }
+        .fa-instagram { color: #e1306c; }
+        .fa-x-twitter { color: var(--text-color); }
+
+        /* ===== Entrance Animations ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.94); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        .top-toolbar   { animation: fadeDown 0.5s cubic-bezier(.22,.68,0,1.2) both; }
+        .top-badge     { animation: fadeIn  0.5s ease both 0.15s; }
+        .banner        { animation: fadeIn  0.6s ease both 0.25s; }
+        .info          { animation: fadeUp  0.55s ease both 0.4s; }
+
+        .link-card     { animation: fadeUp 0.5s ease both; }
+        .section-title { animation: fadeUp 0.5s ease both 0.5s; }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="top-toolbar">
+        <button class="tool-btn" onclick="toggleTheme()" id="themeBtn">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
+            <span id="themeText">الوضع الصباحي</span>
+        </button>
+        <button class="tool-btn" onclick="toggleLang()" id="langBtn">
+            <i class="fa-solid fa-globe"></i>
+            <span id="langText">English</span>
+        </button>
+    </div>
+
+    <div class="header-container">
+        <div class="top-badge">ℂ𝕠𝕦𝕣𝕤𝕖</div>
+        <div class="banner">
+            <div class="profile-img">
+                <img src="2e3c58b7-4974-4ce7-9efd-6eb0cd41b5a5.png" alt="Course Profile">
+            </div>
+        </div>
+        <div class="info">
+            <h1>ℂ𝕠𝕦𝕣𝕤𝕖</h1>
+            <p>@course</p>
+            <p id="bio" class="fade-target">ستريمر وصانع محتوى</p>
+        </div>
+    </div>
+
+    <div class="links-section">
+        <div class="section-title fade-target" id="streamTitle">منصات البث</div>
+
+        <a href="https://kick.com/course-3" target="_blank" class="link-card" style="animation-delay:0.55s">
+            <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+            <div class="link-info">
+                <span>Course_3</span>
+                <i class="fa-brands fa-kickstarter fa-kick"></i>
+            </div>
+        </a>
+
+        <a href="https://www.youtube.com/@Course-e3o" target="_blank" class="link-card" style="animation-delay:0.65s">
+            <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+            <div class="link-info">
+                <span>YouTube</span>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+        </a>
+
+        <div class="section-title fade-target" id="socialTitle">روابط التواصل الاجتماعي الأخرى</div>
+
+        <a href="https://www.tiktok.com/@course_r" target="_blank" class="link-card" style="animation-delay:0.75s">
+            <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+            <div class="link-info">
+                <span>course_r</span>
+                <i class="fa-brands fa-tiktok"></i>
+            </div>
+        </a>
+
+        <a href="https://discord.gg/hAEgnMz6hk" target="_blank" class="link-card" style="animation-delay:0.85s">
+            <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+            <div class="link-info">
+                <span>Discord</span>
+                <i class="fa-brands fa-discord"></i>
+            </div>
+        </a>
+
+        <a href="https://x.com/RhymKhald16414" target="_blank" class="link-card" style="animation-delay:0.95s">
+            <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+            <div class="link-info">
+                <span>RhymKhald16414</span>
+                <i class="fa-brands fa-x-twitter"></i>
+            </div>
+        </a>
+
+        <a href="https://www.instagram.com/khaleid342/" target="_blank" class="link-card" style="animation-delay:1.05s">
+            <i class="fa-solid fa-arrow-up-right-from-square arrow"></i>
+            <div class="link-info">
+                <span id="instaText" class="fade-target">انستقرام</span>
+                <i class="fa-brands fa-instagram"></i>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            const isAr = document.getElementById('mainHtml').getAttribute('lang') === 'ar';
+
+            if (isDark) {
+                body.setAttribute('data-theme', 'light');
+                icon.className = 'fa-solid fa-moon';
+                themeText.innerText = isAr ? 'الوضع الليلي' : 'Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = 'fa-solid fa-sun';
+                themeText.innerText = isAr ? 'الوضع الصباحي' : 'Light Mode';
+            }
+        }
+
+        let currentLang = 'ar';
+
+        const translations = {
+            ar: {
+                dir: 'rtl',
+                bio: 'ستريمر وصانع محتوى',
+                streamTitle: 'منصات البث',
+                socialTitle: 'روابط التواصل الاجتماعي الأخرى',
+                instaText: 'انستقرام',
+                langText: 'English',
+                themeLight: 'الوضع الصباحي',
+                themeDark: 'الوضع الليلي',
+            },
+            en: {
+                dir: 'ltr',
+                bio: 'Streamer & Content Creator',
+                streamTitle: 'Streaming Platforms',
+                socialTitle: 'Other Social Media',
+                instaText: 'Instagram',
+                langText: 'العربية',
+                themeLight: 'Light Mode',
+                themeDark: 'Dark Mode',
+            }
+        };
+
+        function toggleLang() {
+            const html = document.getElementById('mainHtml');
+            const targets = document.querySelectorAll('.fade-target');
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+
+            targets.forEach(el => el.classList.add('fade-out'));
+
+            setTimeout(() => {
+                currentLang = currentLang === 'ar' ? 'en' : 'ar';
+                const t = translations[currentLang];
+
+                html.setAttribute('lang', currentLang);
+                html.setAttribute('dir', t.dir);
+
+                document.getElementById('bio').innerText = t.bio;
+                document.getElementById('streamTitle').innerText = t.streamTitle;
+                document.getElementById('socialTitle').innerText = t.socialTitle;
+                document.getElementById('instaText').innerText = t.instaText;
+                document.getElementById('langText').innerText = t.langText;
+                document.getElementById('themeText').innerText = isDark ? t.themeLight : t.themeDark;
+
+                targets.forEach(el => el.classList.remove('fade-out'));
+            }, 300);
+        }
+    </script>
+</body>
+</html>
